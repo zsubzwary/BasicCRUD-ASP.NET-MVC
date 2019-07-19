@@ -17,6 +17,11 @@ namespace BasicFuncWebApp.Controllers
             return View(studentModels);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         public ActionResult Details(string id)
         {
             int sid = 0;

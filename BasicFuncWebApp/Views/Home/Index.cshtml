@@ -3,11 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Home Page</h2>
+<br />
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -22,6 +21,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            Actions
         </th>
         <th></th>
     </tr>
@@ -41,9 +43,9 @@
             @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Details", "Details", new { id = item.sid }, new { @class = "btn btn-info" }) 
+            @Html.ActionLink("Edit", "Edit", new { id=item.sid }, new { @class = "btn btn-warning" }) 
+            @Html.ActionLink("Delete", "Delete", new { id = item.sid }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

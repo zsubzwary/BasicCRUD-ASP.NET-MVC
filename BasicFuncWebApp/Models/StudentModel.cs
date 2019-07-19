@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BasicFuncWebApp.Models
 {
     public class StudentModel
     {
         [Display(AutoGenerateField = true, Name = "ID")]
+        [HiddenInput(DisplayValue = false)]
         public int sid { get; set; }
 
         [Required]

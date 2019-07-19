@@ -26,6 +26,7 @@ namespace BasicFuncWebApp.Helper
             using (SQLiteConnection connection = new SQLiteConnection(getConnectionString()))
             {
                 SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                connection.Open();
                 SQLiteDataReader sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
@@ -38,6 +39,7 @@ namespace BasicFuncWebApp.Helper
                     };
                 }
                 sdr.Close();
+                connection.Close();
             }
             return studentModels;
         }

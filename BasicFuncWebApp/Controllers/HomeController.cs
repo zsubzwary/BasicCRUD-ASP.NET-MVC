@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BasicFuncWebApp.Helper;
+using BasicFuncWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,9 @@ namespace BasicFuncWebApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            List<StudentModel> studentModels;
+            studentModels = DBHelper.getStudentModels();
+            return View(studentModels);
         }
 
         public ActionResult About()

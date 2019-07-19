@@ -17,6 +17,18 @@ namespace BasicFuncWebApp.Controllers
             return View(studentModels);
         }
 
+        public ActionResult Details(string id)
+        {
+            int sid = 0;
+            bool isInt = int.TryParse(id, out sid);
+            if (isInt == false || sid < 0)
+            {
+                return View(new StudentModel { sid = 0, email = "example@example.com", firstName = "Not provided", lastName = "Not provided" });
+            }
+            StudentModel stuModel = DBHelper.getStudentModelByID(sid);
+            return View(stuModel);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

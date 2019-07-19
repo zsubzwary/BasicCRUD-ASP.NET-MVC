@@ -44,5 +44,31 @@ namespace BasicFuncWebApp.Helper
             }
             return studentModels;
         }
+
+        public static StudentModel getStudentModelByID(int sid)
+        {
+            StudentModel studentModel = new StudentModel();
+            string query = $"SELECT * FROM [student] WHERE sid = {sid};";
+            using (SQLiteConnection connection = new SQLiteConnection(getConnectionString()))
+            {
+                SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                connection.Open();
+                SQLiteDataReader sdr = cmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    StudentModel stdModel = new StudentModel()
+                    {
+                        sid = Convert.ToInt32(sdr["sid"]),
+                        email = sdr["email"].ToString(),
+                        firstName = sdr["firstName"].ToString(),
+                        lastName = sdr["lastName"].ToString()
+                    };
+                    studentModel = stdModel;
+                }
+                sdr.Close();
+                connection.Close();
+            }
+            return studentModel;
+        }
     }
 }

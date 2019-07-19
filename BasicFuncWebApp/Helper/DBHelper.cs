@@ -37,6 +37,7 @@ namespace BasicFuncWebApp.Helper
                         firstName = sdr["firstName"].ToString(),
                         lastName = sdr["lastName"].ToString()
                     };
+                    studentModels.Add(stdModel);
                 }
                 sdr.Close();
                 connection.Close();

@@ -8,6 +8,9 @@ namespace BasicFuncWebApp.Models
 {
     public class StudentModel
     {
+        [Display(AutoGenerateField = true)]
+        public int sid { get; set; }
+
         [Required]
         [Display(Name = "First name")]
         public string firstName { get; set; }

@@ -6,11 +6,30 @@
 
 <h2>Edit</h2>
 
+@{
+    if (ViewBag.ShowAlert == true)
+    {
+        <br /> <br />
+        <div class="alert alert-success alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @ViewBag.AlertMessage
+        </div>
+    }
+    else if (ViewBag.ShowAlertDanger == true)
+    {
+        <br /> <br />
+        <div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @ViewBag.AlertMessage
+        </div>
+    }
+}
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })

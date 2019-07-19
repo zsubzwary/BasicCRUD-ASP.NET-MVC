@@ -37,10 +37,39 @@ namespace BasicFuncWebApp.Controllers
             {
                 return View(new StudentModel { sid = 0, email = "example@example.com", firstName = "Not provided", lastName = "Not provided" });
             }
+
+            if (TempData["showAlert"] != null)
+            {
+                ViewBag.ShowAlertDanger = true;
+                ViewBag.AlertMessage = TempData["showAlert"].ToString();
+            }
             StudentModel stuModel = DBHelper.getStudentModelByID(sid);
             return View(stuModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(StudentModel student)
+        {
+            if (ModelState.IsValid)
+            {
+                int noOfRowsEffected = DBHelper.updateStudentModel(student);
+                if (noOfRowsEffected == 1)
+                {
+                    // this means only one row is effected which is what was supposed to happen in first place
+                    // now move him/her to details page to show them new details
+                    return RedirectToAction("details", new { id = student.sid });
+                }
+                else if (noOfRowsEffected <= 0)
+                {
+                    //this means nothing has been updated
+                    TempData["showAlert"] = "Could not update the record !";
+                    return RedirectToAction("edit", new { id = student.sid });
+                }
+            }
+            TempData["showAlert"] = "Could not update the record !";
+            return RedirectToAction("edit", new { id = student.sid });
+        }
 
         public ActionResult About()
         {

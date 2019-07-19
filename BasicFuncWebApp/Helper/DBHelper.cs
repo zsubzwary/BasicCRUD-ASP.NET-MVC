@@ -45,6 +45,37 @@ namespace BasicFuncWebApp.Helper
             return studentModels;
         }
 
+        public static StudentModel addStudentToDB(StudentModel studentModel)
+        {
+            StudentModel stdModel = new StudentModel();
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(getConnectionString()))
+                {
+
+                    using (SQLiteCommand cmd = new SQLiteCommand(connection))
+                    {
+                        String query = $"INSERT INTO student ( firstName, lastName, email ) VALUES ( '{studentModel.firstName}', '{studentModel.lastName}', '{studentModel.email}' );  SELECT last_insert_rowid(); ";
+                        cmd.Connection = connection;
+                        cmd.CommandText = query;
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        connection.Open();
+
+                        object obj = cmd.ExecuteScalar();
+                        long id = (long)obj; // Note regardless of data type, SQLite always returns autoincrement fields as long.
+                        studentModel.sid = Convert.ToInt32(id);
+                        return studentModel;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            return stdModel;
+        }
+
         public static int updateStudentModel(StudentModel student)
         {
             int noOfRowEffected;

@@ -22,6 +22,27 @@ namespace BasicFuncWebApp.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(StudentModel studentModel)
+        {
+            if (ModelState.IsValid)
+            {
+                StudentModel student = DBHelper.addStudentToDB(studentModel);
+                // TODO: handel the case below
+                if (student.sid <= 0)
+                {
+                    // this means student is not inserted
+                }
+                else if (student.sid >= 1)
+                {
+                    // this might mean that student is inserted
+                    return RedirectToAction("details", new { id = student.sid });
+                }
+            }
+            return View();
+        }
+
         public ActionResult Details(string id)
         {
             int sid = 0;
@@ -43,6 +64,7 @@ namespace BasicFuncWebApp.Controllers
                 return View(new StudentModel { sid = 0, email = "example@example.com", firstName = "Not provided", lastName = "Not provided" });
             }
 
+            // TODO: Remove the showAlert form TempData when used
             if (TempData["showAlert"] != null)
             {
                 ViewBag.ShowAlertDanger = true;

@@ -10,7 +10,7 @@ namespace BasicFuncWebApp.Models
     public class StudentModel
     {
         [Display(AutoGenerateField = true, Name = "ID")]
-        [HiddenInput(DisplayValue = false)]
+        //[HiddenInput(DisplayValue = false)]
         public int sid { get; set; }
 
         [Required]

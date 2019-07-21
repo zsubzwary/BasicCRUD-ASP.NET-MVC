@@ -52,7 +52,6 @@ namespace BasicFuncWebApp.Helper
             {
                 using (SQLiteConnection connection = new SQLiteConnection(getConnectionString()))
                 {
-
                     using (SQLiteCommand cmd = new SQLiteCommand(connection))
                     {
                         String query = $"INSERT INTO student ( firstName, lastName, email ) VALUES ( '{studentModel.firstName}', '{studentModel.lastName}', '{studentModel.email}' );  SELECT last_insert_rowid(); ";
@@ -66,7 +65,6 @@ namespace BasicFuncWebApp.Helper
                         studentModel.sid = Convert.ToInt32(id);
                         return studentModel;
                     }
-
                 }
             }
             catch (Exception ex)
@@ -131,6 +129,5 @@ namespace BasicFuncWebApp.Helper
             }
             return noOfRowEffected;
         }
-
     }
 }

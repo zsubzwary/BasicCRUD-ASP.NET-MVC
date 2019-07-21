@@ -45,7 +45,9 @@
         <td>
             @Html.ActionLink("Details", "Details", new { id = item.sid }, new { @class = "btn btn-info" }) 
             @Html.ActionLink("Edit", "Edit", new { id=item.sid }, new { @class = "btn btn-warning" }) 
-            @Html.ActionLink("Delete", "Delete", new { id = item.sid }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Delete", "Delete",
+           new { id = item.sid },
+           new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you wish to delete this?');" })
         </td>
     </tr>
 }

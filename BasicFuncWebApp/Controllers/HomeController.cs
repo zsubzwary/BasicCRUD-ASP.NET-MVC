@@ -98,6 +98,16 @@ namespace BasicFuncWebApp.Controllers
             return RedirectToAction("edit", new { id = student.sid });
         }
 
+        public ActionResult Delete(int id)
+        {
+            int noOfRowsEffected = DBHelper.deleteStudentModel(id);
+            if (noOfRowsEffected == 1)
+            {
+                // this means deleted successfully
+            }
+            return RedirectToAction("index");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

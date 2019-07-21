@@ -116,5 +116,21 @@ namespace BasicFuncWebApp.Helper
             }
             return studentModel;
         }
+
+        public static int deleteStudentModel(int sid)
+        {
+            int noOfRowEffected;
+            List<StudentModel> studentModels = new List<StudentModel>();
+            string query = $"DELETE FROM student WHERE sid = {sid}; ";
+            using (SQLiteConnection connection = new SQLiteConnection(getConnectionString()))
+            {
+                SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                connection.Open();
+                noOfRowEffected = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+            return noOfRowEffected;
+        }
+
     }
 }

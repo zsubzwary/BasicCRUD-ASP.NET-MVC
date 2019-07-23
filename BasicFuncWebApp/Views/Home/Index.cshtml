@@ -43,11 +43,17 @@
             @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id = item.sid }, new { @class = "btn btn-info" }) 
-            @Html.ActionLink("Edit", "Edit", new { id=item.sid }, new { @class = "btn btn-warning" }) 
-            @Html.ActionLink("Delete", "Delete",
-           new { id = item.sid },
-           new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you wish to delete this?');" })
+            @Html.ActionLink("Details", "Details", new { id = item.sid }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Edit", "Edit", new { id = item.sid }, new { @class = "btn btn-warning" })
+
+            <div style="display: inline;">
+                @using (Html.BeginForm("Delete", "Home", FormMethod.Post, new { @style = "display: inline;" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("id", item.sid)
+                    <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Confirm, please.');" />
+                }
+            </div>
         </td>
     </tr>
 }

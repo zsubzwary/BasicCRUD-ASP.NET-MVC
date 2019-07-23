@@ -98,8 +98,11 @@ namespace BasicFuncWebApp.Controllers
             return RedirectToAction("edit", new { id = student.sid });
         }
 
-        public ActionResult Delete(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(FormCollection formCollection)
         {
+            int id = int.Parse(formCollection["id"]);
             int noOfRowsEffected = DBHelper.deleteStudentModel(id);
             if (noOfRowsEffected == 1)
             {
